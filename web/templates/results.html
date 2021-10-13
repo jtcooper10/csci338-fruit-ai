@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- document_head.html -->
+<html lang="en-US">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+<title>CSCI338: Group Project</title>
+</head>
+
+<body>
+	<div id="particles-js"></div>
+	<div id="header">
+		<b>Fruit Recognition</b>
+	</div>
+
+	<div class="card-stack">
+
+        <div class="card card-large">
+            <h1>Great!</h1>
+            <p>You did something, but at what cost?!
+            </p>
+        </div>
+
+		<div class="card" style="width: 100%;">
+			<h2>Try again?</h2>
+			<h3>Select a file to see if Carmen can identify the fruit:</h3>
+			<form action="{{url_for('get_results')}}" method="post">
+				<input type="file" id="myFile" name="filename">
+				<input type="submit">
+			</form>
+		</div>
+
+	</div>
+	<script src="{{url_for('static', filename='scripts/particles.js')}}"></script>
+	<script src="{{url_for('static', filename='scripts/app.js')}}"></script>
+</body>
+
+</html>

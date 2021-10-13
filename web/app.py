@@ -1,17 +1,17 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
-@app.route('/<name>')
-def hello(name):
-    return f'Hello, {name}!'
-
-
+# Main page for project
+# Submission button to process images
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def main_page():
+    return render_template('index.html')
 
+# Secondary page to view results of image submission
+@app.route('/get_results', methods=['POST'])
+def get_results():
+    return render_template('results.html')
 
 if __name__ == '__main__':
     app.run()
