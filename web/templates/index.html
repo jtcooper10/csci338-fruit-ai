@@ -16,10 +16,12 @@
 </div>
 
 <div class="card-stack">
+
     <div class="card-container">
         <div class="card card-small">
             <b>The Team:</b><br>Garrett<br>James<br>Josh<br>Guy<br>Nicholas<br>Cristian
         </div>
+
         <div class="card card-large">
             <h1>Carmen</h1>
             <p>Carmen is the name of the group's fruit-recognition program. Carmen has the ability to identify close to
@@ -30,11 +32,14 @@
 
     <div class="card" style="width: 100%;">
         <h2>Submit a Picture</h2>
-        <h3>Select a file to see if Carmen can identify the fruit:</h3>
-        <form action="{{url_for('get_results')}}" method="post">
-            <input type="file" id="myFile" name="filename">
-            <input type="submit">
-        </form>
+        <p>Select an image file from your computer to see if Carmen can identify the fruit.
+            <br>Use image with extension .jpeg (or) .png</p>
+        <div class="submitImage">
+            <form action="{{url_for('get_results')}}" method="POST" enctype="multipart/form-data">
+                <input type="file" id="myImage" name="imageName" accept="image/jpeg, image/jpg, image/png">
+                <input type="submit">
+            </form>
+        </div>
     </div>
 
 </div>

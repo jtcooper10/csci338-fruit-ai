@@ -6,6 +6,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision.datasets import ImageFolder
 from PIL import Image
 from typing import Union
+from datetime import datetime
 
 
 class FruitModel:
@@ -41,6 +42,7 @@ class FruitModel:
             raise ValueError(f"The PyTorch module provided ({model.fc.out_features} features) "
                              f"does not match the labels provided ({len(labels)} labels)")
         self._model = model.to("cpu")
+        # self._model = model.to("cuda:0")
 
         self.threshold = float(threshold)
 
@@ -79,9 +81,9 @@ class FruitModel:
         :param img_data: Image to generate predictions for.
         A PyTorch tensor is greatly preferred, but a PIL image can use default transformations to pre-process for you.
         An example of this usage:
-        >>> from PIL import Image
-        >>> model = FruitModel(labels["example1", "example2"])
-        >>> model.predict(Image.open(r"/path/to/image"))
+        <<< from PIL import Image
+        <<< model = FruitModel(labels["example1", "example2"])
+        <<< model.predict(Image.open(r"/path/to/image"))
         <<< dict({ "example1": 0.7 })
 
         :param limit: Indicate whether or not low-scoring predictions should be filtered out.
@@ -193,6 +195,9 @@ class FruitTrainingModel(FruitModel):
         """
         m = self._model.train()
         values, labels = data
+        # # following two lines are needed for CUDA, comment out for CPU
+        # values = values.cuda()
+        # labels = labels.cuda()
         self.__optimizer.zero_grad()
         result = m(values)
         loss = self.__loss(result, labels)

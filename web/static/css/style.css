@@ -89,6 +89,17 @@ a {
 	color: blue;
 }
 
+.submitImage {
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 32px;
+	background: #072000;
+	border: 1px solid white;
+	border-radius: 5px;
+	padding: 0px 15px 15px 15px;
+	width: fit-content;
+	margin: auto;
+}
+
 table.reqTable td, tr {
     background-color: #c0c0c0;
     border-color: #000000;
