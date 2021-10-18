@@ -2,14 +2,7 @@
 
 import os
 from flask import Flask, render_template, request
-import torch
-import torch.utils.data
-import torch.nn as nn
-import torch.nn.functional as func
-import torchvision
-import numpy as np
 from PIL import Image
-import os
 import errno
 import sys
 
@@ -62,10 +55,11 @@ def get_results():
         file.save(fullName)
         img = Image.open(fullName)
         # save results
-        results = mx.predict(img)
+        results = [(label, score) for label, score in mx.predict(img, limit=False).items()]
+        results = sorted(results, key=lambda k: -k[1])
         # extract fruit name and confidence from results
-        fruitResults = str(list(results.keys()))[2:-2].lower()
-        confidence = "{:.2f}".format(float(str(list(results.values()))[2:-2]) * 100)
+        fruitResults, confidence = results[0]
+        confidence = "{:.2f}".format(confidence * 100)
     return render_template('results.html', imgpath=newName, aiFruit=fruitResults, aiCon=confidence)
 
 
