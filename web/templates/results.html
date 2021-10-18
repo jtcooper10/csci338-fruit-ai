@@ -24,9 +24,8 @@
             <br>
             Here is the original image you uploaded.
             <br>
-            <i>ObjectName/Confidence</i>
-            <br>
-            <img src="{{ url_for('static', filename='images/'+imgpath) }}">
+            <p>This totally looks like a {{aiFruit}}. I'm {{aiCon}}% sure.</p>
+            <img src="{{ url_for('static', filename='images/'+imgpath) }}" class="fruit">
         </p>
 
     </div>

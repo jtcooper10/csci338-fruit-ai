@@ -100,6 +100,11 @@ a {
 	margin: auto;
 }
 
+.fruit {
+    width: 700px;
+    height: auto;
+}
+
 table.reqTable td, tr {
     background-color: #c0c0c0;
     border-color: #000000;
