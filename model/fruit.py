@@ -99,13 +99,12 @@ class FruitModel:
         m = self._model.eval()
         predictions = m(img_data)
         probabilities = torch.nn.functional.softmax(predictions, dim=1).squeeze(0)
-        return {
-            self._labels[label_id]: score.item()
-            for label_id, score in enumerate(probabilities)
-            # Filtering only applied if limit=True.
-            # When limit=False, the condition below is always true and so no items are removed.
-            if not limit or score.item() >= self.threshold
-        }
+
+        results = {label: 0.0 for label in self._labels}
+        for label_id, score in enumerate(probabilities):
+            results[self._labels[label_id]] += float(score)
+
+        return results
 
     @classmethod
     def from_file(cls, path: "str", labels: "list[str]", threshold=0.6) -> "FruitModel":

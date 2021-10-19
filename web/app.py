@@ -25,10 +25,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 modelPath = os.path.join(rootDir, "model.pth")
 trainingPath = os.path.join(rootDir, "training")
-classes = ['Apple Red 1', 'Apple Red 2', 'Apple Red 3', 'Apricot', 'Banana', 'Blueberry', 'Cantaloupe 1',
-           'Cantaloupe 2', 'Cherry 1', 'Cherry 2', 'Cocos', 'Guava', 'Kiwi', 'Lemon', 'Limes', 'Mango', 'Orange',
-           'Papaya', 'Peach', 'Peach 2', 'Peach Flat', 'Pear', 'Pear 2', 'Pineapple', 'Raspberry', 'Strawberry',
-           'Strawberry Wedge', 'Tomato 1', 'Tomato 2', 'Tomato 3', 'Watermelon']
+classes = ['Apple', 'Apple', 'Apple', 'Apricot', 'Banana', 'Blueberry', 'Cantaloupe',
+           'Cantaloupe', 'Cherry', 'Cherry', 'Cocos', 'Guava', 'Kiwi', 'Lemon', 'Limes', 'Mango', 'Orange',
+           'Papaya', 'Peach', 'Peach', 'Peach', 'Pear', 'Pear', 'Pineapple', 'Raspberry', 'Strawberry',
+           'Strawberry', 'Tomato', 'Tomato', 'Tomato', 'Watermelon']
 
 mx = model.fruit.FruitModel.from_file(labels=classes, path=modelPath)
 
