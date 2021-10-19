@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Carmen AI &#8212; Carmen AI 0.0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section class="tex2jax_ignore mathjax_ignore" id="carmen-ai">
+<h1>Carmen AI<a class="headerlink" href="#carmen-ai" title="Permalink to this headline">¶</a></h1>
+<p><em>Carmen</em> is an image classification application used to classify a number of different fruits.
+Our current image set contains:</p>
+<ul class="simple">
+<li><p>Apples</p></li>
+<li><p>Apricots</p></li>
+<li><p>Bananas</p></li>
+<li><p>Blueberries</p></li>
+<li><p>Cantaloupe</p></li>
+<li><p>Cherries</p></li>
+<li><p>Cocos</p></li>
+<li><p>Guavas</p></li>
+<li><p>Kiwis</p></li>
+<li><p>Lemons</p></li>
+<li><p>Limes</p></li>
+<li><p>Mangoes</p></li>
+<li><p>Oranges</p></li>
+<li><p>Papayas</p></li>
+<li><p>Peaches</p></li>
+<li><p>Pears</p></li>
+<li><p>Pineapples</p></li>
+<li><p>Raspberries</p></li>
+<li><p>Strawberries</p></li>
+<li><p>Tomatoes</p></li>
+<li><p>Watermelons</p></li>
+</ul>
+<p>For best results, it is recommended to use cropped images, where the edges of the fruit meets the edge of the image.
+This engine currently only supports image classification, and accounting for background area and/or competing objects
+falls within the domain of object recognition.</p>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To start the webserver, make sure you have the following dependencies installed:</p>
+<ul class="simple">
+<li><p>Flask</p></li>
+<li><p>PyTorch</p></li>
+<li><p>Torchvision</p></li>
+</ul>
+<p>Then, navigate to the <code class="docutils literal notranslate"><span class="pre">web/</span></code> directory and run:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>flask run
+</pre></div>
+</div>
+<p>Visit the webpage on port 5000 to use.</p>
+</section>
+</section>
+<section id="module-model.fruit">
+<span id="python-modules"></span><h1>Python Modules<a class="headerlink" href="#module-model.fruit" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="model.fruit.FruitModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">model.fruit.</span></span><span class="sig-name descname"><span class="pre">FruitModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.nn.Module</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.fruit.FruitModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Wrapper class for PyTorch model prediction.</dt><dd><p>Using a pre-trained PyTorch model, FruitModel objects can generate predictions based on image data.</p>
+</dd>
+<dt>The model may additionally be instantiated from a .pth file using from_file().</dt><dd><p>Once instantiated, it may be used for classifying images.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitModel.export">
+<span class="sig-name descname"><span class="pre">export</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.fruit.FruitModel.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the given model as a .pth file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Absolute location of file to export to.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitModel.from_file">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.6</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="model.html#model.fruit.FruitModel" title="model.fruit.FruitModel"><span class="pre">FruitModel</span></a></span></span><a class="headerlink" href="#model.fruit.FruitModel.from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Import a model from a .pth file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Absolute location of file to import.</p></li>
+<li><p><strong>threshold</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><em>float</em></a>) – Value on range (0.0, 1.0] where only predictions which meet the confidence threshold
+are considered valid. Any predictions whose confidence scores do not exceed the threshold are
+deemed invalid and are discarded.</p></li>
+<li><p><strong>labels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><em>list</em></a><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a><em>]</em>) – Optional list of indexed label strings representing the names for each classification.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model instantiated from the indicated .pth file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitModel.get_transform">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_transform</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">torchvision.transforms.transforms.Compose</span></span></span><a class="headerlink" href="#model.fruit.FruitModel.get_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the default PyTorch transformation for converting image data to a normalized tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of default Torchvision transformation object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitModel.predict">
+<span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">img_data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">torch.Tensor</span><span class="p"><span class="pre">,</span> </span><span class="pre">Image.Image</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#model.fruit.FruitModel.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine what classifications the given image belongs to and their probabilities.
+Either a pre-processed Tensor or PIL image may be provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_data</strong> – Image to generate predictions for.
+A PyTorch tensor is greatly preferred, but a PIL image can use default transformations to pre-process.
+An example of this usage:
+&gt;&gt;&gt; from PIL import Image
+&gt;&gt;&gt; model = FruitModel(labels[“example1”, “example2”])
+&gt;&gt;&gt; model.predict(Image.open(r”/path/to/image”))
+&lt;&lt;&lt; dict({ “example1”: 0.7 })</p></li>
+<li><p><strong>limit</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) – Indicate whether or not low-scoring predictions should be filtered out.
+If set to False, then all possible labels will be returned with their corresponding confidence scores.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Dictionary containing all confident classifications and their confidence scores.
+Any classifications whose confidence scores are below the threshold are filtered out, unless limit=False.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitModel.transform">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">PIL.Image.Image</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None._VariableFunctionsClass.tensor</span></span></span><a class="headerlink" href="#model.fruit.FruitModel.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the default PyTorch transformation and apply it against the given image data.
+Useful for one-off transformations, but if repeated transformations are needed,
+it is preferable to use get_transform to get a reusable transform function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>PIL.Image.Image</em>) – Image data to apply the default transformation against.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Transformed and normalized tensor data based on the provided image.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="model.fruit.FruitTrainingModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">model.fruit.</span></span><span class="sig-name descname"><span class="pre">FruitTrainingModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.nn.Module</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#model.fruit.FruitTrainingModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitTrainingModel.detach">
+<span class="sig-name descname"><span class="pre">detach</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="model.html#model.fruit.FruitModel" title="model.fruit.FruitModel"><span class="pre">model.fruit.FruitModel</span></a></span></span><a class="headerlink" href="#model.fruit.FruitTrainingModel.detach" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a new trained model suitable for predictions from the current model.
+All training methods will be disabled in the generated model, and is optimized for inference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Non-trainable copy of the training model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitTrainingModel.get_data">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">get_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torchvision.transforms.Compose</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">loader_options</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)"><span class="pre">tuple</span></a><span class="p"><span class="pre">[</span></span><span class="pre">DataLoader</span><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#model.fruit.FruitTrainingModel.get_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dataset import helper using PIL images for training/testing purposes.
+The classifications of each dataset must match during training, testing, and inference.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>root</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – Root directory where image classification folders are kept.
+Each sub-folder in the root directory should contain a single image category.
+The classification names are derived from the name of each folder.
+(It is highly recommended to use the EXACT same root folder structure for each model version)</p></li>
+<li><p><strong>transform</strong> (<em>torchvision.transforms.Compose</em>) – Optional torchvision transform.
+If not specified, the default transformer is used.
+(Option is only useful if experimenting with different transforms)</p></li>
+<li><p><strong>loader_options</strong> – Dictionary containing options to pass to the dataloader.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Pair of type (DataLoader, dict) where the dict maps label names to their corresponding ids.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="model.fruit.FruitTrainingModel.run_epoch">
+<span class="sig-name descname"><span class="pre">run_epoch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">torch.utils.data.dataset.Dataset</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#model.fruit.FruitTrainingModel.run_epoch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs a single training iteration on the model with the given PyTorch dataset.
+The labels provided by the dataset MUST match the instantiated model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>torch.utils.data.Dataset</em>) – PyTorch dataset with labels matching the model.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Float representing loss value of the iteration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Nicholas Harris, Joshua Cooper, Garrett London, Guy Phelps, James Clabo, Cristian Henriquez.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -9,25 +9,31 @@ from typing import Union
 
 
 class FruitModel:
+    """
+    Wrapper class for PyTorch model prediction.
+        Using a pre-trained PyTorch model, FruitModel objects can generate predictions based on image data.
+
+    The model may additionally be instantiated from a .pth file using from_file().
+        Once instantiated, it may be used for classifying images.
+    """
+
     def __init__(self, labels: "list[str]", model: "torch.nn.Module" = None, threshold=0.6):
         """
-        Wrapper class for PyTorch model prediction.
-        The model may additionally be instantiated from a .pth file using from_file().
-        Once instantiated, it may be used for classifying images.
+        Instantiate FruitModel with a pre-trained PyTorch model and corresponding label set.
 
         :param labels: List of indexed label strings representing the names for each classification.
-        If providing a pre-built model, the labels must match those that the model was trained with.
+            If providing a pre-built model, the labels must match those that the model was trained with.
         :type labels: list[str]
 
         :param model: Optional PyTorch module to predict/train against.
-        The project default model will be created automatically if not provided.
-        In most scenarios, there is no need to provide a model (unless you are experimenting with different ResNets).
-        (If you are wanting to use a pre-existing model without experimenting, use from_file() instead)
+            The project default model will be created automatically if not provided.
+            In most scenarios, there is no need to provide a model (unless you are experimenting with different ResNets).
+            (If you are wanting to use a pre-existing model without experimenting, use from_file() instead)
         :type model: torch.Module
 
         :param threshold: Value on range (0.0, 1.0) where only predictions which meet the confidence threshold
-        are considered valid. Any predictions whose confidence scores do not exceed the threshold are
-        deemed invalid and are discarded.
+            are considered valid. Any predictions whose confidence scores do not exceed the threshold are
+            deemed invalid and are discarded.
         :type threshold: float
 
         :raises ValueError: When the number of labels provided does not match the number of model features.
@@ -77,19 +83,19 @@ class FruitModel:
         Either a pre-processed Tensor or PIL image may be provided.
 
         :param img_data: Image to generate predictions for.
-        A PyTorch tensor is greatly preferred, but a PIL image can use default transformations to pre-process for you.
-        An example of this usage:
-        >>> from PIL import Image
-        >>> model = FruitModel(labels["example1", "example2"])
-        >>> model.predict(Image.open(r"/path/to/image"))
-        <<< dict({ "example1": 0.7 })
+            A PyTorch tensor is greatly preferred, but a PIL image can use default transformations to pre-process.
+            An example of this usage:
+            >>> from PIL import Image
+            >>> model = FruitModel(labels["example1", "example2"])
+            >>> model.predict(Image.open(r"/path/to/image"))
+            <<< dict({ "example1": 0.7 })
 
         :param limit: Indicate whether or not low-scoring predictions should be filtered out.
-        If set to False, then all possible labels will be returned with their corresponding confidence scores.
+            If set to False, then all possible labels will be returned with their corresponding confidence scores.
         :type limit: bool
 
         :return: Dictionary containing all confident classifications and their confidence scores.
-        Any classifications whose confidence scores are below the threshold are filtered out, unless limit=False.
+            Any classifications whose confidence scores are below the threshold are filtered out, unless limit=False.
         """
         if isinstance(img_data, Image.Image):
             img_data = FruitModel.transform(img_data).unsqueeze(0)
@@ -114,8 +120,8 @@ class FruitModel:
         :type path: str
 
         :param threshold: Value on range (0.0, 1.0] where only predictions which meet the confidence threshold
-        are considered valid. Any predictions whose confidence scores do not exceed the threshold are
-        deemed invalid and are discarded.
+            are considered valid. Any predictions whose confidence scores do not exceed the threshold are
+            deemed invalid and are discarded.
         :type threshold: float
 
         :param labels: Optional list of indexed label strings representing the names for each classification.
@@ -145,21 +151,21 @@ class FruitTrainingModel(FruitModel):
         Extends from the base FruitModel, and as such may be used for predictions as well as training.
 
         :param model: Optional pre-existing PyTorch module.
-        Only recommended when experimenting with different PyTorch backbones.
+            Only recommended when experimenting with different PyTorch backbones.
         :type model: torch.nn.Module
 
         :param threshold: Cutoff value for an "accurate" prediction.
-        Lower threshold values result in more false positives, while higher values result in more missed predictions.
+            Lower threshold values result in more false positives, while higher values result in more missed predictions.
         :type threshold: float
 
         :param labels: Ordered list of classification labels for the model.
-        Indexed by classification ID, i.e. labels[0] should return the label of classification 0.
+            Indexed by classification ID, i.e. labels[0] should return the label of classification 0.
         :type labels: list[str]
 
         :param optimizer: Optional PyTorch optimizer.
-        Only recommended when experimenting with different PyTorch optimizers.
+            Only recommended when experimenting with different PyTorch optimizers.
         :param loss: Optional PyTorch loss function.
-        Only recommended when experimenting with different PyTorch loss functions.
+            Only recommended when experimenting with different PyTorch loss functions.
         """
         super(FruitTrainingModel, self).__init__(labels=labels, model=model, threshold=threshold)
         self._model.train()
@@ -209,14 +215,14 @@ class FruitTrainingModel(FruitModel):
         The classifications of each dataset must match during training, testing, and inference.
 
         :param root: Root directory where image classification folders are kept.
-        Each sub-folder in the root directory should contain a single image category.
-        The classification names are derived from the name of each folder.
-        (It is highly recommended to use the EXACT same root folder structure for each model version)
+            Each sub-folder in the root directory should contain a single image category.
+            The classification names are derived from the name of each folder.
+            (It is highly recommended to use the EXACT same root folder structure for each model version)
         :type root: str
 
         :param transform: Optional torchvision transform.
-        If not specified, the default transformer is used.
-        (Option is only useful if experimenting with different transforms)
+            If not specified, the default transformer is used.
+            (Option is only useful if experimenting with different transforms)
         :type transform: torchvision.transforms.Compose
 
         :param loader_options: Dictionary containing options to pass to the dataloader.
